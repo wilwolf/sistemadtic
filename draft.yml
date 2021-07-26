@@ -1,0 +1,30 @@
+models:
+  Models\Tipo:
+    nombre: string 
+    slug: string unique
+    descripcion: longtext
+    timestamps: true
+    softDeletes: true
+    relationships:
+      hasMany: Titulos
+  Models\Titulos:
+    tipo_id: id foreing
+    nombre: string
+    slug: string unique
+    descripcion: longtext
+    timestamps: true
+    softDeletes: true
+    relationships:
+      hasMany: Eventos
+  Models\Eventos:
+    id_titulo: id foreing
+    id_user: id foreing
+    modalidad: string
+    cargah: numeric
+    fechainicio: date
+    fechafin: date
+    estado: string
+    relationships:
+      belongsToMany: users
+
+

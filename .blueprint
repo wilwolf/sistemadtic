@@ -1,0 +1,16 @@
+created:
+    - database/factories/Models/TipoFactory.php
+    - database/factories/Models/TitulosFactory.php
+    - database/factories/Models/EventosFactory.php
+    - database/migrations/2021_07_25_232642_create_tipos_table.php
+    - database/migrations/2021_07_25_232643_create_titulos_table.php
+    - database/migrations/2021_07_25_232644_create_eventos_table.php
+    - database/migrations/2021_07_25_232645_create_eventos_users_table.php
+    - app/Models/Tipo.php
+    - app/Models/Titulos.php
+    - app/Models/Eventos.php
+models:
+    User: { name: string, email: string, password: string, remember_token: 'string:100 nullable' }
+    Models\Tipo: { nombre: string, slug: 'string unique', descripcion: longtext, timestamps: timestamps, softdeletes: softDeletes, relationships: { hasMany: Titulos } }
+    Models\Titulos: { tipo_id: 'id foreing', nombre: string, slug: 'string unique', descripcion: longtext, timestamps: timestamps, softdeletes: softDeletes, relationships: { hasMany: Eventos } }
+    Models\Eventos: { id_titulo: 'id foreing', id_user: 'id foreing', modalidad: string, cargah: numeric, fechainicio: date, fechafin: date, estado: string, relationships: { belongsToMany: users } }
