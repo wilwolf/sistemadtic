@@ -4,12 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Titulos extends Model
+class Departamentos extends Model
 {
     use \Backpack\CRUD\app\Models\Traits\CrudTrait;
-    use HasFactory, SoftDeletes;
+    use HasFactory;
 
     /**
      * The attributes that are mass assignable.
@@ -17,10 +16,8 @@ class Titulos extends Model
      * @var array
      */
     protected $fillable = [
-        'tipo_id',
         'nombre',
-        'slug',
-        'descripcion',
+        'acro',
     ];
 
     /**
@@ -30,19 +27,5 @@ class Titulos extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'tipo_id' => 'integer',
     ];
-
-
-    public function eventos()
-    {
-        return $this->hasMany(\App\Models\Eventos::class);
-    }
-
-    public function tipo()
-    {
-        return $this->belongsTo(\App\Models\Tipo::class);
-    }
-
-    
 }

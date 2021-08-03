@@ -18,9 +18,15 @@ class CreateEventosTable extends Migration
             $table->unsignedBigInteger('id_titulo');
             $table->unsignedBigInteger('id_user');
             $table->string('modalidad');
+            $table->string('version');
             $table->string('cargah');
             $table->date('fechainicio');
             $table->date('fechafin');
+            $table->string('nombrex');
+            $table->string('nombrey');
+            $table->string('qrx');
+            $table->string('qry');
+            $table->longText('contenido');
             $table->string('estado');
             $table->timestamps();
         });

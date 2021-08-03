@@ -19,9 +19,15 @@ class Eventos extends Model
         'id_titulo',
         'id_user',
         'modalidad',
+        'version',
         'cargah',
         'fechainicio',
         'fechafin',
+        'nombrex',
+        'nombrey',
+        'qrx',
+        'qry',
+        'contenido',
         'estado',
     ];
 
@@ -39,18 +45,14 @@ class Eventos extends Model
     ];
 
 
+    public function titulos()
+    {
+        return $this->belongsTo(\App\Models\Titulos::class, 'id_titulo');
+    }
+
     public function users()
     {
-        return $this->belongsToMany(\App\Models\Users::class);
+        return $this->belongsTo(\App\User::class, 'id_user');
     }
 
-    public function idTitulo()
-    {
-        return $this->belongsTo(\App\Models\IdTitulo::class);
-    }
-
-    public function idUser()
-    {
-        return $this->belongsTo(\App\Models\IdUser::class);
-    }
 }

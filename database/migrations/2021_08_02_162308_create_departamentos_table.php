@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTitulosTable extends Migration
+class CreateDepartamentosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateTitulosTable extends Migration
      */
     public function up()
     {
-        Schema::create('titulos', function (Blueprint $table) {
+        Schema::create('departamentos', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('tipo_id');
-            $table->string('nombre');
-            $table->string('slug')->unique();
-            $table->longText('descripcion');
-            $table->softDeletes();
+            $table->string('nombre', 50);
+            $table->string('acro', 5);
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ class CreateTitulosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('titulos');
+        Schema::dropIfExists('departamentos');
     }
 }

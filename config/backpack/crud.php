@@ -495,7 +495,7 @@ return [
         // "so_SO" => "Somali (Somalia)",
         // "so" => "Somali",
         // "es_AR" => "Spanish (Argentina)",
-        // "es_BO" => "Spanish (Bolivia)",
+         "es_BO" => "Spanish (Bolivia)",
         // "es_CL" => "Spanish (Chile)",
         // "es_CO" => "Spanish (Colombia)",
         // "es_CR" => "Spanish (Costa Rica)",

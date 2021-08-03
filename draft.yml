@@ -1,30 +1,17 @@
 models:
-  Models\Tipo:
-    nombre: string 
-    slug: string unique
-    descripcion: longtext
-    timestamps: true
-    softDeletes: true
-    relationships:
-      hasMany: Titulos
-  Models\Titulos:
-    tipo_id: id foreing
-    nombre: string
-    slug: string unique
-    descripcion: longtext
-    timestamps: true
-    softDeletes: true
-    relationships:
-      hasMany: Eventos
-  Models\Eventos:
-    id_titulo: id foreing
-    id_user: id foreing
-    modalidad: string
-    cargah: numeric
-    fechainicio: date
-    fechafin: date
-    estado: string
-    relationships:
-      belongsToMany: users
+  Models\Departamentos:
+    nombre: string:50
+    acro: string:5
+  Models\Estudiantes:
+    carnet: bigInteger
+    complemento: string:20
+    extension: id foreing 
+    nombre: string:50
+    apellidos: string:50
+    telefono: bigInteger
+    email: string:50
+    imagen: string:255
+    relationships: 
+      belongsTo: Departamentos
 
 

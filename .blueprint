@@ -1,16 +1,14 @@
 created:
-    - database/factories/Models/TipoFactory.php
-    - database/factories/Models/TitulosFactory.php
-    - database/factories/Models/EventosFactory.php
-    - database/migrations/2021_07_25_232642_create_tipos_table.php
-    - database/migrations/2021_07_25_232643_create_titulos_table.php
-    - database/migrations/2021_07_25_232644_create_eventos_table.php
-    - database/migrations/2021_07_25_232645_create_eventos_users_table.php
-    - app/Models/Tipo.php
-    - app/Models/Titulos.php
-    - app/Models/Eventos.php
+    - database/factories/Models/DepartamentosFactory.php
+    - database/factories/Models/EstudiantesFactory.php
+    - database/migrations/2021_08_02_162308_create_departamentos_table.php
+    - database/migrations/2021_08_02_162309_create_estudiantes_table.php
+    - app/Models/Departamentos.php
+    - app/Models/Estudiantes.php
 models:
     User: { name: string, email: string, password: string, remember_token: 'string:100 nullable' }
     Models\Tipo: { nombre: string, slug: 'string unique', descripcion: longtext, timestamps: timestamps, softdeletes: softDeletes, relationships: { hasMany: Titulos } }
     Models\Titulos: { tipo_id: 'id foreing', nombre: string, slug: 'string unique', descripcion: longtext, timestamps: timestamps, softdeletes: softDeletes, relationships: { hasMany: Eventos } }
-    Models\Eventos: { id_titulo: 'id foreing', id_user: 'id foreing', modalidad: string, cargah: numeric, fechainicio: date, fechafin: date, estado: string, relationships: { belongsToMany: users } }
+    Models\Eventos: { id_titulo: 'id foreing', id_user: 'id foreing', modalidad: string, version: int, cargah: int, fechainicio: date, fechafin: date, nombrex: int, nombrey: int, qrx: int, qry: int, contenido: longtext, estado: string, relationships: { hasMany: 'Titulos, Users' } }
+    Models\Departamentos: { nombre: 'string:50', acro: 'string:5' }
+    Models\Estudiantes: { carnet: bigInteger, complemento: 'string:20', extension: 'id foreing', nombre: 'string:50', apellidos: 'string:50', telefono: bigInteger, email: 'string:50', imagen: 'string:255', relationships: { belongsTo: Departamentos } }

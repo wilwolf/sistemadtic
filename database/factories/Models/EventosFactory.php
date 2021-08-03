@@ -28,9 +28,15 @@ class EventosFactory extends Factory
             'id_titulo' => IdTitulo::factory(),
             'id_user' => IdUser::factory(),
             'modalidad' => $this->faker->word,
+            'version' => $this->faker->word,
             'cargah' => $this->faker->word,
             'fechainicio' => $this->faker->date(),
             'fechafin' => $this->faker->date(),
+            'nombrex' => $this->faker->word,
+            'nombrey' => $this->faker->word,
+            'qrx' => $this->faker->word,
+            'qry' => $this->faker->word,
+            'contenido' => $this->faker->text,
             'estado' => $this->faker->word,
         ];
     }

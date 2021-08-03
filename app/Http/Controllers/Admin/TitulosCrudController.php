@@ -67,6 +67,11 @@ class TitulosCrudController extends CrudController
               'label'   => 'Descripcion',
               'type'    => 'text'  
             ],
+            [
+                'name'  => 'created_at',
+                'label' => 'Fecha de Creacion',
+                'type'  => 'date'
+            ]   
             
         ]);
         
