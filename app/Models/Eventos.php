@@ -55,4 +55,17 @@ class Eventos extends Model
         return $this->belongsTo(\App\User::class, 'id_user');
     }
 
+
+    /** Consultas personalizadas wqi */
+    public function eventotitulo(){
+        $data = \App\Models\Titulos::select('eventos.id as id', 'CONCAT(titulos.nombre, " ",eventos.version, "-",eventos.modalidad) as nombre')
+                                    ->join('eventos', 'titulos.id', '=', 'eventos.id_titulo') 
+                                    ->get();
+        var_dump($data);
+        return $data;
+    }
+
+
+
+
 }

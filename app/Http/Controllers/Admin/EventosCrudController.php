@@ -284,6 +284,4 @@ class EventosCrudController extends CrudController
         ];
     }
 
-   
-
 }

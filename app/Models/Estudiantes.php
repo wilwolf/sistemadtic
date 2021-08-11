@@ -48,7 +48,16 @@ class Estudiantes extends Model
         return $this->belongsTo(\App\Models\Departamentos::class, 'extension');
     }
 
-    
+     /*
+    |--------------------------------------------------------------------------
+    | ACCESORS
+    |--------------------------------------------------------------------------
+    */
+    public function getApellidosAndNombreAttribute(){
+        return $this->apellidos.' '.$this->nombre;
+    }  
+
+
     /**mutators wqi */
     public function setImagenAttribute($value)
     {

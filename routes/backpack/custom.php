@@ -8,6 +8,7 @@
 
 Route::get('api/article', 'App\Http\Controllers\Api\ArticleController@index');
 Route::get('api/article-search', 'App\Http\Controllers\Api\ArticleController@search');
+Route::get('admin/eventos/eventostitulos', 'App\Http\Controllers\Eventos@eventoTitulo');
 
 Route::group([
     'prefix'     => config('backpack.base.route_prefix', 'admin'),
@@ -52,4 +53,7 @@ Route::group([
     Route::crud('eventos', 'EventosCrudController');
     Route::crud('departamentos', 'DepartamentosCrudController');
     Route::crud('estudiantes', 'EstudiantesCrudController');
+    Route::crud('fuentes', 'FuentesCrudController');
+    Route::crud('inscripciones', 'InscripcionesCrudController');
+    
 }); // this should be the absolute last line of this file

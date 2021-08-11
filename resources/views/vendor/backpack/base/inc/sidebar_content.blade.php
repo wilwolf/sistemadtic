@@ -50,3 +50,5 @@
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('titulos') }}'><i class='nav-icon la la-question'></i> Titulos</a></li>
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('departamentos') }}'><i class='nav-icon la la-question'></i> Departamentos</a></li>
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('estudiantes') }}'><i class='nav-icon la la-question'></i> Estudiantes</a></li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('fuentes') }}'><i class='nav-icon la la-question'></i> Fuentes</a></li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('inscripciones') }}'><i class='nav-icon la la-question'></i> Inscripciones</a></li>
