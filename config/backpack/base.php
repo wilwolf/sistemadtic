@@ -35,7 +35,11 @@ return [
 
     // CSS files that are loaded in all pages, using Laravel's asset() helper
     'styles' => [
+       
+        'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css',
+        'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css',
         'packages/backpack/base/css/bundle.css',
+       
 
         // Here's what's inside the bundle:
          'packages/@digitallyhappy/backstrap/css/style.min.css',
@@ -51,6 +55,7 @@ return [
          'https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic',
         // Example (load font-awesome instead of line-awesome):
          'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css',
+         //Live update
     ],
 
     // CSS files that are loaded in all pages, using Laravel's mix() helper
@@ -119,9 +124,11 @@ return [
     // JS files that are loaded in all pages, using Laravel's asset() helper
     'scripts' => [
         // Google Analytics
+        'http://code.jquery.com/jquery-2.0.3.min.js',
+        '//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js',
+        '//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js',
         'https://www.googletagmanager.com/gtag/js?id=UA-16782706-13',
         'assets/js/ga.js',
-
         // Backstrap includes jQuery, Bootstrap, CoreUI, PNotify, Popper
         'packages/backpack/base/js/bundle.js',
 
@@ -138,6 +145,7 @@ return [
         // 'https://unpkg.com/vue@2.4.4/dist/vue.min.js',
         // 'https://unpkg.com/react@16/umd/react.production.min.js',
         // 'https://unpkg.com/react-dom@16/umd/react-dom.production.min.js',
+        //'https://cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js'
     ],
 
     // JS files that are loaded in all pages, using Laravel's mix() helper

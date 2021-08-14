@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\InscripcionesRequest;
+use App\Models\Inscripciones;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 use Illuminate\Support\Facades\DB;
 use PDF;
+use Illuminate\Http\Request;
 use Carbon\Carbon;
-
+use Illuminate\Support\Facades\View;
 use PhpParser\Node\Expr\Exit_;
 
 /**
@@ -62,32 +64,52 @@ class InscripcionesCrudController extends CrudController
             ],
 
         ]);
-        CRUD::addColumn([
+        
+
+        $this->crud->addColumn([
+            'label' => 'Apellidos',
+            'type'  => 'select',
             'name'  => 'id_estudiante',
-            'label' => 'Estudiante',
-            'type'  => 'model_function',
-            'function_name' => 'getApellidosAndNombreAttribute',
-           /*'searchLogic'   => function ($query, $column, $searchTerm) {
-                $query->orWhere('nombre','like','%'.$searchTerm.'%');
-                $query->orWhere('apellidos', 'like', '%'.$searchTerm.'%');
-            }*/
+            'entity' => 'estudiantes',
+            'attribute' => 'apellidos',
+            'model' => '\App\Models\Inscripciones',
+            'orderable' => true,
+            'orderLogic' =>  function ($query, $column, $columnDirection) {
+                return $query->leftJoin('estudiantes', 'estudiantes.id', '=', 'inscripciones.id_estudiante')
+                    ->orderBy('estudiantes.apellidos', $columnDirection)->select('inscripciones.*');
+            }
+        ]);
+
+        $this->crud->addColumn([
+            'label' => 'Nombre(es)',
+            'type'  => 'select',
+            'name'  => 'id_estudiante',
+            'entity' => 'estudiantes',
+            'key'   => 'estudiantes_nombre',
+            'attribute' => 'nombre',
+            'model' => '\App\Models\Inscripciones',
+            'orderable' => true,
+            'orderLogic' =>  function ($query, $column, $columnDirection) {
+                return $query->leftJoin('estudiantes', 'estudiantes.id', '=', 'inscripciones.id_estudiante')
+                    ->orderBy('estudiantes.nombre', $columnDirection)->select('inscripciones.*');
+            }
         ]);
         CRUD::addColumn([
                 'name'  => 'estado',
                 'label' => 'Estado',
-                'type'  => 'boolean',
-                'options' => [0=>'OK', 1=>'Pago/Deposito', 2=>'Otra razon'],  
+                'type'  => 'select_from_array',
+                'options' => [0=>'OK', 1=>'Pago/Deposito', 2=>'Otra razon '],  
                 'wrapper' => [
                     'element' => 'span',
                     'class'   => function ($crud, $column, $entry, $related_key) {
-                        if ($column['text'] == 'OK') {
+                        if ($entry->estado == 0) {
                             return 'badge badge-success';
                         }
-                        if ($column['text'] == 'Pago/Deposito') {
+                        else if ($entry->estado == 1) {
                             return 'badge badge-error';
                         }
-                        if ($column['text'] == 'Otra razon') {
-                            return 'badge badge-error';
+                        else if ($entry->estado == 2) {
+                            return 'badge badge-warning';
                         }                        
                     },
                 ],
@@ -97,18 +119,26 @@ class InscripcionesCrudController extends CrudController
             'label' => 'Nota',
             'type' => 'number',
             'wrapper' => [
-                'element' => 'span',
+                'element' => 'a',
+                'href' => '#',
                 'class' => function($crud, $column, $entry, $related_key){
                     if($column['text']==0){
-                        return 'badge badge-error';
+                        return 'badge badge-error xedit';
                     }
                     if($column['text'] > 0 and $column['text'] < 71){
-                        return 'badge badge-warning';
+                        return 'badge badge-warning xedit';
                     }
                     if($column['text']>=71){
-                        return 'badge badge-success';
+                        return 'badge badge-success xedit';
                     }
-                }
+                },
+                'data-pk' => function($crud, $column, $entry,$related_key){
+                    return $entry->id; 
+                },
+                'data-name' => 'nota',
+
+
+
             ]
 
         ]);
@@ -133,6 +163,7 @@ class InscripcionesCrudController extends CrudController
         $this->crud->enableDetailsRow();
         $this->crud->setDetailsRowView('vendor.backpack.crud.details_row.inscripcion');
         $this->crud->enableExportButtons();
+        $this->addCustomCrudFilters();
         /**
          * Columns can be defined using the fluent syntax or array syntax:
          * - CRUD::column('price')->type('number');
@@ -200,6 +231,7 @@ class InscripcionesCrudController extends CrudController
         
         CRUD::field('monto')->size(4)->default(50);
         CRUD::field('nota')->size(4)->default('0');
+        
         CRUD::field('deposito')->size(4)->default('0');
 
         /**
@@ -278,6 +310,81 @@ class InscripcionesCrudController extends CrudController
         $pdf->setPaper('letter','landscape');
         return $pdf->download($certificado[0]->carnet.'-'.$certificado[0]->evento.'-'.$certificado[0]->id.'-Certificado.pdf');
     }
-    
+    /**
+     * FILTROS PERSONALIZADOS
+     */
+    protected function addCustomCrudFilters()
+    {
+        $this->crud->addFilter([ // select2 filter
+            'name' => 'id_evento',
+            'type' => 'select2',
+            'label'=> 'Eventos',
+        ], function () {
+            return DB::table('inscripciones')->select('inscripciones.id_evento as id', 'titulos.nombre as name')
+                        ->join('eventos', 'eventos.id', '=', 'inscripciones.id_evento')
+                        ->join('titulos','titulos.id', '=', 'eventos.id_titulo')
+                        ->get()->keyBy('id')->pluck('name', 'id')->toArray();
+            //return \Backpack\NewsCRUD\app\Models\Category::all()->keyBy('id')->pluck('name', 'id')->toArray();
+        }, function ($value) { // if the filter is active
+            $this->crud->addClause('where', 'id_evento', $value);
+        });
+
+        $this->crud->addFilter([ // select2 filter
+            'name' => 'id_estudiante',
+            'type' => 'select2',
+            'label'=> 'Apellidos',
+        ], function () {
+            return DB::table('inscripciones')->select('inscripciones.id_estudiante as id', 'estudiantes.apellidos  as name')
+                        ->join('estudiantes', 'estudiantes.id', '=', 'inscripciones.id_estudiante')
+                        ->distinct()->orderBy('estudiantes.apellidos', 'ASC')
+                        ->get()->keyBy('id')->pluck('name', 'id')->toArray();            
+        }, function ($value) { // if the filter is active
+            $this->crud->addClause('where', 'id_estudiante', $value);
+        });
+
+        
+    }
+    /**
+     * ACTUALIZACION DE NOTAS EN VIVO
+     */
+    public function updateNotas(Request $request){
+        if ($request->ajax()) {
+           //print_r($request->pk);
+            //print_r(Inscripciones::find($request->pk)->toArray());
+            $inscripcion = Inscripciones::find($request->pk);
+            $inscripcion->nota = $request->value;
+            if($inscripcion->save()){
+                return response()->json(['success' => true]);
+            }
+            else{
+                return response()->json(['error' => true]);
+            }
+  
+
+        }
+    }
+
+    /***
+     * PARA EL REGISTRO DE NOTAS
+    */
+    public function notas($evento){
+       $detalles = DB::table('eventos')
+                ->select('titulos.nombre as tituloe','users.name as docente', 'eventos.version as version', 'eventos.modalidad as modalidad')
+                ->join('titulos', 'titulos.id', '=', 'eventos.id_titulo')
+                ->join('users', 'users.id', '=', 'eventos.id_user')
+                ->where('eventos.id', '=', $evento) 
+                ->get()->toArray();
+        $notas = DB::table('inscripciones')
+        ->select('estudiantes.carnet as carnet', 'estudiantes.apellidos as apellidos', 'estudiantes.nombre as nombre', 'inscripciones.nota as nota', 'inscripciones.id as id' ) 
+        ->join('estudiantes', 'estudiantes.id', '=', 'inscripciones.id_estudiante')
+        ->join('eventos', 'eventos.id', '=', 'inscripciones.id_evento')
+        ->orderBy('estudiantes.apellidos', 'ASC')
+        ->orderBy('estudiantes.nombre', 'ASC')
+
+        ->where('inscripciones.id_evento', '=', $evento)->get();
+        
+        //print_r(count($notas));
+        return View::make('notas', ['notas'=> $notas, 'detalles'=>$detalles]);
+    } 
 
 }

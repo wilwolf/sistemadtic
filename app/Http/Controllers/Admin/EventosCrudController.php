@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests\EventosRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class EventosCrudController
@@ -67,6 +68,27 @@ class EventosCrudController extends CrudController
 
             ],
             [
+                'name'  => 'estado',
+                'label' => 'Estado',
+                'type'  => 'boolean',
+                'options' => [0 => 'Creado', 1 => 'En Curso', 2 => 'Finalizado'],
+                'wrapper' => [
+                    'element' => 'span',
+                    'class' => function ($crud, $column, $entry, $related_key) {
+                        if ($column['text'] == 'Creado') {
+                            return 'badge badge-warning';
+                        }
+                        if ($column['text'] == 'En Curso') {
+                            return 'badge badge-success';
+                        }
+                        if ($column['text'] == 'Finalizado') {
+                            return 'badge badge-alert';
+                        }            
+                        return 'badge badge-default';
+                    },
+                ],
+            ],
+            [
                 'name'      =>'id_user',
                 'label'     => 'Docente',
                 'type'      => 'select',
@@ -92,27 +114,7 @@ class EventosCrudController extends CrudController
                 'type'  => 'date'
 
             ],
-            [
-                'name'  => 'estado',
-                'label' => 'Estado',
-                'type'  => 'boolean',
-                'options' => [0 => 'Creado', 1 => 'En Curso', 2 => 'Finalizado'],
-                'wrapper' => [
-                    'element' => 'span',
-                    'class' => function ($crud, $column, $entry, $related_key) {
-                        if ($column['text'] == 'Creado') {
-                            return 'badge badge-warning';
-                        }
-                        if ($column['text'] == 'En Curso') {
-                            return 'badge badge-success';
-                        }
-                        if ($column['text'] == 'Finalizado') {
-                            return 'badge badge-alert';
-                        }            
-                        return 'badge badge-default';
-                    },
-                ],
-            ],
+            
 
 
             
@@ -128,6 +130,10 @@ class EventosCrudController extends CrudController
          * - CRUD::column('price')->type('number');
          * - CRUD::addColumn(['name' => 'price', 'type' => 'number']); 
          */
+        $this->crud->addButtonFromModelFunction('line', 'id', 'botonLlenadoNotas', 'beginning');
+        $this->crud->removeButton('show');
+        $this->addCustomCrudFilters();
+        $this->crud->enableExportButtons();
     }
 
     /**
@@ -249,12 +255,14 @@ class EventosCrudController extends CrudController
                 'type'  => 'number',
                 'label' => 'Posicion nombre X',
                 'tab'   => 'Datos Certificado',
+                'default' => 0,
                 'wrapperAttributes' => ['class' => 'form-group col-md-6'],
             ],
             [
                 'name'  => 'nombrey',
                 'type'  => 'number',
                 'label' => 'Posicion nombre Y',
+                'default' => 0,
                 'tab'   => 'Datos Certificado',
                 'wrapperAttributes' => ['class' => 'form-group col-md-6'],
             ],
@@ -262,6 +270,7 @@ class EventosCrudController extends CrudController
                 'name'  => 'qrx',
                 'label' => 'Posicion del QR X',
                 'type'  => 'number',
+                'default' => 0,
                 'tab'   => 'Datos Certificado',
                 'wrapperAttributes' => ['class' => 'form-group col-md-6'],
             ],
@@ -270,18 +279,42 @@ class EventosCrudController extends CrudController
                 'label' => 'Posicion del QR Y',
                 'type'  => 'number',
                 'tab'   => 'Datos Certificado',
+                'default' => 0,
                 'wrapperAttributes' => ['class' => 'form-group col-md-6'],
             ],
             [
                 'name' => 'contenido',
                 'type' => 'ckeditor',
                 'label' => 'Texto del certificado',
+                'default' => 'Titulo del certificado',
                 'tab'   => 'Datos Certificado',
                 'wrapperAttributes' => ['class' => 'form-group col-md-6'],
             ]
 
             
         ];
+    }
+    /**
+     * FILTROS PERSONALIZADOS
+     */
+    protected function addCustomCrudFilters()
+    {
+        $this->crud->addFilter([ // select2 filter
+            'name' => 'id_titulo',
+            'type' => 'select2',
+            'label'=> 'Titulo',
+        ], function () {
+            return DB::table('eventos')->select('eventos.id as id', 'titulos.nombre as name')
+                        ->join('titulos','titulos.id', '=', 'eventos.id_titulo')
+                        ->get()->keyBy('id')->pluck('name', 'id')->toArray();
+            //return \Backpack\NewsCRUD\app\Models\Category::all()->keyBy('id')->pluck('name', 'id')->toArray();
+        }, function ($value) { // if the filter is active
+            $this->crud->addClause('where', 'eventos.id', $value);
+        });
+
+        
+
+        
     }
 
 }

@@ -39,6 +39,9 @@ class Inscripciones extends Model
         'id_fuente' => 'integer',
     ];
 
+    public function getNombrec(){
+        return $this->apellidos.' '.$this->nombre;
+    }
 
     public function eventos()
     {
@@ -99,7 +102,12 @@ class Inscripciones extends Model
      * Genera Botton imprimir certificado
      */
     public function botonImprimirCertificado(){
-        return '<a class="btn btn-warning btn-sm  " target="_blank" href="'.backpack_url('inscripciones/pdf').'/'.$this->id.'/'.$this->id_evento.'/'.$this->id_estudiante.'" data-toggle="tooltip" title="Para imprimir el Certificado."><i class="la la-file-pdf-o"></i> </a>';
+        if($this->estado == 2 || $this->estado == 1){
+            return '<a class="btn btn-error btn-sm  " target="_blank" href="'.backpack_url('#').'" data-toggle="tooltip" title="No se puede imprimir el Certificado."><i class="la la-close"></i> </a>';
+        }else{
+            return '<a class="btn btn-success btn-sm  " target="_blank" href="'.backpack_url('inscripciones/pdf').'/'.$this->id.'/'.$this->id_evento.'/'.$this->id_estudiante.'" data-toggle="tooltip" title="Para imprimir el Certificado."><i class="la la-file-pdf-o"></i> </a>';
+        }
+       
     }
 
 

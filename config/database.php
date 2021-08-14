@@ -61,7 +61,7 @@ return [
             'password'                      => env('DB_PASSWORD', ''),
             'charset'                       => 'utf8',
             'collation'                     => 'utf8_unicode_ci',
-            'prefix'                        => '',
+            'prefix'                        => 'dtic_',
             'strict'                        => false,
             'engine'                        => null,
             'dump_command_path'             => env('MYSQL_DUMP_PATH', '/Applications/MAMP/Library/bin/'), // only the path, so without 'mysqldump' or 'pg_dump'

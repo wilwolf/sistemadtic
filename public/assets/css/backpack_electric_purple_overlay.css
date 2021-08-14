@@ -6,8 +6,8 @@
 .btn-primary, 
 .dataTables_wrapper .dataTables_paginate .paginate_button.current {
     color: #fff;
-    background-color: #7C69EF;
-    border-color: #7C69EF;
+    background-color: #467FD0;
+    border-color: #467FD0;
 }
 
 .btn-primary:hover, 
@@ -32,26 +32,26 @@
 }
 
 .text-primary {
-    color: #7C69EF!important;
+    color: #467FD0!important;
 }
 
 h1 {
-    color: #7C69EF!important;
+    color: #467FD0!important;
 }
 
 .btn-link {
-    color: #7C69EF;
+    color: #467FD0;
 }
 
 .btn-outline-primary {
-    color: #7C69EF;
-    border-color: #7C69EF;
+    color: #467FD0;
+    border-color: #467FD0;
 }
 
 .btn-outline-primary:hover {
     color: #fff;
-    background-color: #7C69EF;
-    border-color: #7C69EF;
+    background-color: #467FD0;
+    border-color: #467FD0;
 }
 
 .btn:hover, 
@@ -64,13 +64,13 @@ h1 {
 .page-item.active .page-link {
     z-index: 1;
     color: #fff;
-    background-color: #7C69EF;
-    border-color: #7C69EF;
+    background-color: #467FD0;
+    border-color: #467FD0;
 }
 
-.page-link:hover { color: #7C69EF; }
+.page-link:hover { color: #467FD0; }
 
-a { color: #7C69EF; }
+a { color: #467FD0; }
 a:hover { color: #4024e8; }
 
 .table-hover tbody tr:hover,
@@ -83,26 +83,26 @@ a:hover { color: #4024e8; }
 .sidebar.sidebar-pills .nav-link.active, 
 .sidebar.sidebar-pills .nav-link:hover,
 .sidebar-pills .nav-link:hover .nav-icon {
-    color: #7C69EF!important;
+    color: #467FD0!important;
 }
 
 .card.bg-primary {
-    border-color: #7C69EF;
+    border-color: #467FD0;
 }
 
 .bg-primary {
-    background-color: #7C69EF!important;
+    background-color: #467FD0!important;
 }
 
 .daterangepicker .ranges li.active,
 .daterangepicker td.active, .daterangepicker td.active:hover {
-    background-color: #7C69EF!important;
+    background-color: #467FD0!important;
 }
 
 .pace .pace-progress {
-	background: #7C69EF;
+	background: #467FD0;
 }
 
 body {
-	/*border-top: 3px solid #7C69EF;*/
+	/*border-top: 3px solid #467FD0;*/
 }

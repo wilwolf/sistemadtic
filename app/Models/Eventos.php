@@ -64,6 +64,17 @@ class Eventos extends Model
         var_dump($data);
         return $data;
     }
+    /**
+     * Enlace para el llenado de notas
+     */
+    public function botonLlenadoNotas(){
+        if($this->estado == 2 ){
+            return '<a class="btn btn-error btn-sm  " target="_blank" href="'.backpack_url('#').'" data-toggle="tooltip" title="Evento Cerrado."><i class="la la-close"></i> </a>';
+        }else{
+            return '<a class="btn btn-success btn-sm  " target="_blank" href="'.backpack_url('inscripciones/notas').'/'.$this->id.'" data-toggle="tooltip" title="Para Llenado de Notas."><i class="la la-align-justify"></i> </a>';
+        }
+       
+    }
 
 
 

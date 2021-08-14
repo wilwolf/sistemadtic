@@ -21,7 +21,6 @@ Route::group([
     Route::crud('monster', 'MonsterCrudController');
     Route::crud('fluent-monster', 'FluentMonsterCrudController');
     Route::crud('icon', 'IconCrudController');
-    Route::crud('product', 'ProductCrudController');
     Route::crud('dummy', 'DummyCrudController');
 
     // ------------------
@@ -46,8 +45,7 @@ Route::group([
             });
         }
     }
-    Route::crud('address', 'AddressCrudController');
-    Route::crud('postal-box', 'PostalBoxCrudController'); 
+    
     Route::crud('tipo', 'TipoCrudController');
     Route::crud('titulos', 'TitulosCrudController');
     Route::crud('eventos', 'EventosCrudController');

@@ -1,6 +1,24 @@
 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('dashboard') }}"><i class="nav-icon la la-dashboard"></i> <span>{{ trans('backpack::base.dashboard') }}</span></a></li>
+<li class="nav-title">Academico</li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('estudiantes') }}'><i class='nav-icon la la-users'></i> Estudiantes</a></li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('inscripciones') }}'><i class='nav-icon la la-paste'></i> Inscripciones</a></li>
+<li class="nav-item nav-dropdown">
+  <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon la la-outdent"></i>Eventos</a>
+  <ul class="nav-dropdown-items">
+    <li class='nav-item'><a class='nav-link' href='{{ backpack_url('eventos') }}'><i class='nav-icon la la-paperclip'></i> Eventos</a></li>
+    <li class='nav-item'><a class='nav-link' href='{{ backpack_url('titulos') }}'><i class='nav-icon la la-paint-brush'></i> Titulos</a></li>    
+  </ul>
+</li>
+<li class="nav-item nav-dropdown">
+  <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon la la-cog"></i>Configuracion</a>
+  <ul class="nav-dropdown-items">
+    <li class='nav-item'><a class='nav-link' href='{{ backpack_url('departamentos') }}'><i class='nav-icon la la-map-o'></i> Departamentos</a></li>
+    <li class='nav-item'><a class='nav-link' href='{{ backpack_url('fuentes') }}'><i class='nav-icon la la-thumb-tack'></i> Fuentes</a></li>
+    <li class='nav-item'><a class='nav-link' href='{{ backpack_url('tipo') }}'><i class='nav-icon la la-tag'></i> Tipos</a></li>
+  </ul>
+</li>
 
-<li class="nav-title">First-Party Packages</li>
+<li class="nav-title">Administracion</li>
 <li class="nav-item nav-dropdown">
     <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon la la-newspaper-o"></i> News</a>
     <ul class="nav-dropdown-items">
@@ -12,7 +30,7 @@
 
 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('page') }}"><i class="nav-icon la la-file-o"></i> <span>Pages</span></a></li>
 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('menu-item') }}"><i class="nav-icon la la-list"></i> <span>Menu</span></a></li>
-
+<li class="nav-title">General</li>
 <!-- Users, Roles Permissions -->
 <li class="nav-item nav-dropdown">
   <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon la la-group"></i> Authentication</a>
@@ -33,22 +51,16 @@
     </ul>
 </li>
 
-<li class="nav-title">Demo Entities</li>
-<li class="nav-item"><a class="nav-link" href="{{ backpack_url('monster') }}"><i class="nav-icon la la-optin-monster"></i> <span>Monsters</span></a></li>
-<li class="nav-item"><a class="nav-link" href="{{ backpack_url('icon') }}"><i class="nav-icon la la-info-circle"></i> <span>Icons</span></a></li>
-<li class="nav-item"><a class="nav-link" href="{{ backpack_url('product') }}"><i class="nav-icon la la-shopping-cart"></i> <span>Products</span></a></li>
-<li class="nav-item"><a class="nav-link" href="{{ backpack_url('fluent-monster') }}"><i class="nav-icon la la-pastafarianism"></i> <span>Fluent Monsters</span></a></li>
-<li class="nav-item"><a class="nav-link" href="{{ backpack_url('dummy') }}"><i class="nav-icon la la-poo"></i> <span>Dummies</span></a></li>
-<li class='nav-item'><a class='nav-link' href='{{ backpack_url('eventos') }}'><i class='nav-icon la la-question'></i> Eventos</a></li>
-<li class='nav-item'><a class='nav-link' href='{{ backpack_url('address') }}'><i class='nav-icon la la-question'></i> Addresses</a></li>
-<li class='nav-item'><a class='nav-link' href='{{ backpack_url('dummy') }}'><i class='nav-icon la la-question'></i> Dummies</a></li>
-<li class='nav-item'><a class='nav-link' href='{{ backpack_url('icon') }}'><i class='nav-icon la la-question'></i> Icons</a></li>
-<li class='nav-item'><a class='nav-link' href='{{ backpack_url('monster') }}'><i class='nav-icon la la-question'></i> Monsters</a></li>
-<li class='nav-item'><a class='nav-link' href='{{ backpack_url('postal-box') }}'><i class='nav-icon la la-question'></i> Postal Boxes</a></li>
-<li class='nav-item'><a class='nav-link' href='{{ backpack_url('product') }}'><i class='nav-icon la la-question'></i> Products</a></li>
-<li class='nav-item'><a class='nav-link' href='{{ backpack_url('tipo') }}'><i class='nav-icon la la-question'></i> Tipos</a></li>
-<li class='nav-item'><a class='nav-link' href='{{ backpack_url('titulos') }}'><i class='nav-icon la la-question'></i> Titulos</a></li>
-<li class='nav-item'><a class='nav-link' href='{{ backpack_url('departamentos') }}'><i class='nav-icon la la-question'></i> Departamentos</a></li>
-<li class='nav-item'><a class='nav-link' href='{{ backpack_url('estudiantes') }}'><i class='nav-icon la la-question'></i> Estudiantes</a></li>
-<li class='nav-item'><a class='nav-link' href='{{ backpack_url('fuentes') }}'><i class='nav-icon la la-question'></i> Fuentes</a></li>
-<li class='nav-item'><a class='nav-link' href='{{ backpack_url('inscripciones') }}'><i class='nav-icon la la-question'></i> Inscripciones</a></li>
+<li class="nav-item nav-dropdown">
+  <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon las la-exclamation-triangle"></i>Ejemplos</a>
+  <ul class="nav-dropdown-items">
+    <li class="nav-item"><a class="nav-link" href="{{ backpack_url('monster') }}"><i class="nav-icon la la-optin-monster"></i> <span>Monsters</span></a></li>
+    <li class="nav-item"><a class="nav-link" href="{{ backpack_url('icon') }}"><i class="nav-icon la la-info-circle"></i> <span>Icons</span></a></li>
+    <li class="nav-item"><a class="nav-link" href="{{ backpack_url('fluent-monster') }}"><i class="nav-icon la la-pastafarianism"></i> <span>Fluent Monsters</span></a></li>
+    <li class="nav-item"><a class="nav-link" href="{{ backpack_url('dummy') }}"><i class="nav-icon la la-poo"></i> <span>Dummies</span></a></li>
+  </ul>
+</li>
+
+
+
+
