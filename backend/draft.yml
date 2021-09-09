@@ -1,0 +1,18 @@
+models:
+  Models\Fuentes:
+    nombre: string:20
+    descripcion: string:50
+    cuenta: string:30
+    estado: boolean   
+  Models\Inscripciones:
+    id_evento: id foreing
+    id_estudiante: id foreing
+    id_fuente: id foreing
+    estado: string:20
+    nota: integer
+    monto: integer
+    deposito: string:20
+    relationships: 
+      belongsTo: Eventos, Estudiantes, Fuentes
+
+
